@@ -3,6 +3,7 @@ const firstProductName = "T-shirt";
 const capProductName = "Cap";
 
 //Js es muy flexible y hay que tener cuidado con los datos, verificar siempre que sea coherente
+//- - - - >    //     0           1            2       3
 const products = ["T-shirt", capProductName, "Shoes", "TV"];
 const prices = [1, 2, 3, 40];
 
@@ -51,3 +52,37 @@ csvProducts.shift();
 const newCsvItem = csvProducts.join(",");
 console.log(newCsvItem);
 //Devolver el nuevo csv sin el primer y último elemento
+
+/*
+!IMPORTANTE!
+*/
+// Imaginemos que hay un carrito 1 y quiero copiar sus productos
+const productUser1 = ["TV", "PC", "PS5"];
+// Carrito2
+const productUser2 = productUser1;
+
+const addProduct = (newProduct, productList) => {
+  productList.push(newProduct);
+};
+
+addProduct("Cap", productUser2);
+console.log("1", productUser1);
+console.log("2", productUser2);
+// Esto es una mala práctica, estamos modificando ambas listas debido a que comparten la referencia en memoria
+// Quiere decir que el carrito 1 tendría un articulo no deseado
+// esto ocurre con los métodos de push, pop, etc... Como lo soluciono??
+// La forma correcta es utilizando el 'spread' operator (...)
+let productsUser2 = [...productUser1]; //esto crea una copia del array y devuelve un array nuevo
+// Sería equivalente a crear una nueva lista vacía y hacer [].concat(productUser1)
+
+// En programación funcional trabajaríamos así
+const addProducts = (newProduct, productList) => {
+  const newProductList = [...productList];
+  productList.push(newProduct);
+  return newProductList;
+};
+// No modifica valores fuera de su ámbito, debe retornar algo y siempre devuelve el mismo resultado
+
+productsUser2 = addProducts("Cap", productsUser2); //Esto me permite tener control de lo que modifico
+
+console.log(productsUser2);
