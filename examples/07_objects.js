@@ -104,6 +104,63 @@ for (const show of shows) {
 // document.write(template);
 console.log(template);
 
+//Inmutabilidad
+// Este ejemplo genera una copia que al momento de ser modificado modifica el original
+//Esto es algo que debemos evitar, recordar que esta forma de hacer la copia hará que se comparta su ubicación en memoria
+const user = {
+  email: "test@test.com",
+  role: "USER",
+  app: "keppcoding",
+  modules: ["js", "html", "react"],
+  info: {
+    name: "test",
+    surname: "surname",
+  },
+};
+
+// const admin = user;
+
+// admin.email = "admin@test.com";
+// admin.role = "ADMIN";
+
+// console.log(admin, user);
+
+//Como lo solucionamos?
+//1 JSON.stringigy/parse
+
+//const admin = JSON.stringify(user);
+const admin = JSON.parse(JSON.stringify(user)); //para hacer parse ya debe ser un string
+
+admin.email = "admin@test.com";
+admin.role = "ADMIN";
+//También con el spread operator {...user};
+//admin.info.name = "admin"; //Aquí vemos un caso en la que hay una anidación a un nivel más profundo y el spread operator ya no es efectivo
+//Para solucionarlo con el spread haríamos esto
+// const admin = {
+//   ...user,
+//   info: {
+//     ...user.info,
+//   },
+// }; Object.assign({}, user) //generalmente lo usaremos si requiero copiar algo que contenga funciones o valores null
+
+const admin = structuredClone(user);
+admin.email = "admin@test.com";
+admin.role = "ADMIN";
+admin.info.name = "admin";
+
+console.log(admin, user); //User conserva su valor original
+
+//Dentro de un objeto puedes poner cualquier cosa que sea un objeto
+const printer = () => {
+  return None;
+};
+
+//Borrar propiedades
+delete admin.modules;
+
+console.log(admin, user);
+// console.log(JSON.stringify(user, null, 2));
+
 //Breve comentario sobre clases
 class Product {}
 
