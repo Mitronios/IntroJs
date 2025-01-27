@@ -85,3 +85,41 @@ for (const user of users) {
   }
 }
 console.log(hideEmailsKeepcoding, keepcodingUsers);
+console.clear();
+
+const productsInPromo = [
+  [
+    // promo1
+    "T-shirt", //product
+    2, //Quantity
+    "10 % discount", // mensaje
+  ],
+  [
+    //promo2
+    "cap",
+    3,
+    "Third cap free",
+  ],
+];
+const promo1 = productsInPromo[0]; // ["T-shirt", 2, "10% discount"]
+
+console.log(promo1[2]); // 1- % discount
+
+console.log(productsInPromo[0][2]);
+
+const data = [
+  ["PSP", "TV"], // user 1
+  ["Cap", "T-shirt"], //user 2
+  ["TV", "iPhone"], // user 3
+];
+
+let message = "";
+for (const usersProduct of data) {
+  message = `${message} Products: `;
+  for (const product of usersProduct) {
+    message = `${message} ${product}`;
+  }
+  message = `${message} \n`;
+}
+
+console.log(message);
