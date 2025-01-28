@@ -129,7 +129,7 @@ const user = {
 //1 JSON.stringigy/parse
 
 //const admin = JSON.stringify(user);
-const admin = JSON.parse(JSON.stringify(user)); //para hacer parse ya debe ser un string
+const admin = JSON.parse(JSON.stringify(user)); //para hacer parse debe ser un string con formato válido de objeto dentro
 
 admin.email = "admin@test.com";
 admin.role = "ADMIN";
@@ -152,8 +152,11 @@ console.log(admin, user); //User conserva su valor original
 
 //Dentro de un objeto puedes poner cualquier cosa que sea un objeto
 const printer = () => {
-  return None;
+  log: () => {
+    console.log("");
+  };
 };
+printer.log(); // como es un objeto accedemos a su propieda con .
 
 //Borrar propiedades
 delete admin.modules;

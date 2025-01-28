@@ -35,14 +35,14 @@ const [book1, book2] = [
 
 console.log(book1, book2);
 
+//Mas ejemplos
 const getAdminUser = () => {
   return { name: "admin", role: "ADMIN", email: "test@admin.com" };
 };
 
 const { role } = getAdminUser(); // {name: "admin", role: "ADMIN", email: "test@admin.com"}
-//estaríamos obtenuemdo role directamente
+//estaríamos obteniendo role directamente
 
-//Mas ejemplos
 const shows = [
   {
     id: 1,
@@ -64,7 +64,16 @@ const shows = [
   },
 ];
 
+const showRender = ({ name, genres }) => {
+  return `
+    <h2>${name}</h2>
+    <p>${genres.join(", ")}</p>
+  `;
+};
+
+//document.write(showRender);
 //
+
 const csvProducts =
   "T-shirt,10,Amazon\nCap,5,Google\nPants,15,Amazon\nShoes,20,Google";
 
@@ -98,7 +107,7 @@ const processCSV = (csv) => {
       ...products,
       {
         // name: name,
-        name, //cuando hay una variable que se llama como el valor que va contener se puede simplicar de esta forma
+        name, //Cuando el nombre de la propiedad y la variable que se le asigna son el mismo se puede omitir para simplificar
         price: parseInt(price),
         // store: store,
         store,
@@ -110,6 +119,7 @@ const processCSV = (csv) => {
 const products = processCSV(csvProducts);
 console.log(products);
 
+//Recordemos como concatenar arrays sin modificar el dato original
 const arr1 = [1, 2, 3, 4];
 const arr2 = ["as", "test"];
 
@@ -117,6 +127,8 @@ const randomArray = [arr1, arr2]; //esto no es lo mismo que
 const randArray = [...arr1, ...arr2]; //esto
 
 console.log(randArray, randomArray);
+
+//Cuando hacemos lo mismo con objetos hablamos mas de un merge que una concatenación
 
 const infoGeneral = {
   bootcamp: "Keepcoding",
@@ -130,7 +142,7 @@ let module1 = {
 };
 
 let module2 = {
-  ...infoGeneral, // hacer esto sobreescribirá name de info general por el name de module
+  ...infoGeneral, // hacer esto sobreescribirá name de info general por el name de module, en una copia limpia
   name: "HTML",
 };
 
