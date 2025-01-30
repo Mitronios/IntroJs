@@ -38,3 +38,6 @@ export const variable = "Hola";
 const utilFile = "Name";
 export default utilFile;
 // Este export se puede poner una sola vez por archivo
+
+//para Node sería algo así
+// moduleexports = utilFile;
