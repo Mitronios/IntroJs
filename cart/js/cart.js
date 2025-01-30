@@ -62,7 +62,21 @@ const cart = () => {
    * Get the total price of the products in the cart.
    * @returns {number} The total price of the products in the cart.
    */
-  const getTotal = () => {};
+  const getTotal = () => {
+    /*  let total = 0;
+    for (const product of products) {
+      total = total + product.price * product.quantity;
+    } */
+    /* total = products.reduce(
+      (acum, product) => acum + product.price * product.quantity,
+      0
+    );
+    return total; */
+    return products.reduce(
+      (acum, product) => acum + product.price * product.quantity,
+      0
+    );
+  };
 
   /**
    * Applies a discount to a product in the cart.
@@ -70,7 +84,35 @@ const cart = () => {
    * @param {string} discount - The discount percentage to apply.
    * @throws {Error} If the product is not found in the product list.
    */
-  const applyDiscount = (productName, discount) => {};
+  const applyDiscount = (productName, discount) => {
+    const product = products.find(({ name }) => name === productName);
+    if (!product) {
+      throw new Error("Product not found");
+    }
+    discounts = [
+      ...discounts,
+      {
+        discount: parseInt(discount), //ojo estamos recibiendo un string
+        product: { ...product }, // en ese caso solo hay un nivel por lo que el spread operator nos ayuda
+      },
+    ];
+    // product.price = 2;//Este es un error fatal, estoy sobre escribiendo el listado original
+    //mutando su contenido el cual se usa en otros lugares y no debería cambiar
+    //esta es la forma correcta
+    products = products.map((productElement) => {
+      if (productElement.name === productName) {
+        //Cuando encuentro el producto al que debo aplicarle el descuento lo aplico
+        const discountNumber = parseInt(discount);
+        const priceDiscount = productElement.price * (discountNumber / 100);
+        const price = (productElement.price = priceDiscount);
+        return { ...productElement, price };
+      } else {
+        return productElement;
+      }
+    });
+    // Usamos map para iterar por los productos y modificar el que nos interesa
+    //recordemos que map devuelve un nuevo array y una copia limpia
+  };
 
   /**
    * Removes a product from the cart and any discounts associated with it.
