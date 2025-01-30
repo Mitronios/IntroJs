@@ -37,11 +37,11 @@ const getProductInfo = (product, attr) => {
 };
 
 //Distintas maneras de uso
-const productNAme = getProductInfo(secondProduct, "name");
+const productName = getProductInfo(secondProduct, "name");
 getProductInfo(secondProduct, "price");
 
 //Por lo general se ingresa usando la notación del .
-//El uso de [] se reserva a obtener los datos por función o usando la propiedad entre comiilas, "country-city"
+//El uso de [] se reserva a obtener los datos por función o cuando usamos la propiedad entre comillas, "country-city"
 
 const thirdProduct = {
   name: "Shoes",
