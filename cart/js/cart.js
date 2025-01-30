@@ -118,13 +118,40 @@ const cart = () => {
    * Removes a product from the cart and any discounts associated with it.
    * @param {string} productName - The name of the product to remove.
    */
-  const removeProduct = (productName) => {};
+  const removeProduct = (productName) => {
+    //borrar producto
+    products = products.filter((product) => product.name !== productName);
+    //borrar descuento
+    // discounts = [{product: { name: "T-shirt", price: 20, quantity: 2}, discount: 10}]
+    discounts = discounts.filter(
+      (discount) => discount.product.name !== productName
+    );
+  };
 
   /**
    * Removes a discount applied to a product in the cart.
    * @param {string} productName - The name of the product to remove the discount from.
    */
-  const removeDiscount = (productName) => {};
+  const removeDiscount = (productName) => {
+    // Primero actualizamos el producto de lo contrario al borrar el descuento no econtraremos la info necesaria
+    const discount = discounts.find((discount) => {
+      return discount.product.name === productName;
+    });
+    //removeer descuento: Esto ya lo hicimos anteriormente
+    discounts = discounts.filter(
+      (discount) => discount.product.name !== productName
+    );
+    products = products.map((product) => {
+      if (product.name === productName) {
+        return {
+          ...product,
+          price: discount.product.price,
+        };
+      } else {
+        return product;
+      }
+    });
+  };
 
   return {
     addToCart,
